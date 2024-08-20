@@ -84,7 +84,6 @@ function mergeNumbers(op) {
 
 function btnDetect(event) {
   let liElem = event.target;
-  console.log(liElem)
   incomeBtn = liElem.innerHTML;
   if (incomeBtn == "÷") incomeBtn = "/";
   if (incomeBtn == "×") incomeBtn = "*";
