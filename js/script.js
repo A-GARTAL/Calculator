@@ -87,6 +87,7 @@ function btnDetect(event) {
   if (incomeBtn == "÷") incomeBtn = "/";
   if (incomeBtn == "×") incomeBtn = "*";
   if (incomeBtn == "∧") incomeBtn = "**";
+  if (incomeBtn == "−") incomeBtn = "-";
   keyboardAction1();
 }
 function keyboardAction1() {
