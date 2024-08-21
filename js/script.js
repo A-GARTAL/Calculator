@@ -9,43 +9,12 @@ for (let i = 0; i < lis.length; i++) {
   lis[i].addEventListener("click", btnDetect);
 }
 let firstNumber = "",secondNumber = "",action,actionCounter = 0,incomeBtn = "";
-function keyboardAction(event) {
-  let isAction = false,
-    isNumber = false;
-  let btn = event.key;
-  for (let i = 0; i < numbersAndActions.length; i++) {
-    if (btn == numbersAndActions[i]) {
-      if (i < 10) isNumber = true;
-      else isAction = true;
-    }
-  }
-  if (isNumber) {
-    if (actionCounter == 0) {
-      firstNumber += btn;
-      input.value = firstNumber;
-    }
-    if (actionCounter == 1) {
-      input.value = "";
-      secondNumber += btn;
-      input.value = secondNumber;
-    }
-  }
-  if (isAction && firstNumber.length > 0) {
-    if (secondNumber.length == 0) {
-      if (btn == "=" || btn == "Enter" || btn == "Backspace") {
-        actionCounter = 1;
-      } else {
-        actionCounter = 1;
-        action = btn;
-      }
-    } else {
-      input.value = mergeNumbers(action);
-      secondNumber = "";
-      action = btn;
-      actionCounter = 1;
-    }
-  }
+
+function keyboardAction(event){
+  let keyValue = event.key;
+  actionDetect(keyValue);
 }
+
 function mergeNumbers(op) {
   switch (op) {
     case "+":
@@ -89,52 +58,55 @@ function btnDetect(event) {
   if (incomeBtn == "×") incomeBtn = "*";
   if (incomeBtn == "∧") incomeBtn = "**";
   if (incomeBtn == "−") incomeBtn = "-";
-  keyboardAction1();
+  actionDetect(incomeBtn);
 }
-function keyboardAction1() {
-  let isAction = false,
-    isNumber = false;
+
+
+function actionDetect(incomeAction) {
+  let isAction = false,isNumber = false;
   for (let i = 0; i < numbersAndActions.length; i++) {
-    if (incomeBtn == numbersAndActions[i]) {
+    if (incomeAction == numbersAndActions[i]) {
       if (i < 10) isNumber = true;
       else isAction = true;
     }
   }
   if (isNumber) {
     if (actionCounter == 0) {
-      firstNumber += incomeBtn;
+      firstNumber += incomeAction;
       input.value = firstNumber;
     }
     if (actionCounter == 1) {
       input.value = "";
-      secondNumber += incomeBtn;
+      secondNumber += incomeAction;
       input.value = secondNumber;
     }
   }
   if (isAction && firstNumber.length > 0) {
     if (secondNumber.length == 0) {
-      if (
-        incomeBtn == "=" ||
-        incomeBtn == "Enter" ||
-        incomeBtn == "Backspace"
-      ) {
+      if (incomeAction == "=" ||incomeAction == "Enter" ||incomeAction == "Backspace")
+        {
         actionCounter = 1;
-      } else {
-        actionCounter = 1;
-        action = incomeBtn;
-        if (incomeBtn == "C" || incomeBtn == "CE") {
+      }
+       else {
+              actionCounter = 1;
+              action = incomeAction;
+        if (incomeAction == "C" || incomeAction == "CE")
+        {
           mergeNumbers(action);
           actionCounter = 0;
           action = "";
         }
       }
     } else {
-      if (incomeBtn == "C" || incomeBtn == "CE") {
-        mergeNumbers(incomeBtn);
+      if (incomeAction == "C" || incomeAction == "CE")
+        {
+        mergeNumbers(incomeAction);
         actionCounter = 1;
-      } else input.value = mergeNumbers(action);
+      }
+      else 
+      input.value = mergeNumbers(action);
       secondNumber = "";
-      action = incomeBtn;
+      action = incomeAction;
       actionCounter = 1;
     }
   }
