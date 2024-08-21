@@ -46,7 +46,6 @@ function mergeNumbers(op) {
   }
   firstNumber = String(firstNumber);
   secondNumber = "";
-  console.log("merge");
   return firstNumber;
 }
 function btnDetect(event) {
